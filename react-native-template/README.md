@@ -19,7 +19,7 @@ This is a basic React-native template using Typescript
 
 - Create a new project with `npx react-native init newProject --template react-native-template-typescript`
 - Go to the project's root folder
-- Install all the dependencies with `npm install...`
+- Install all the dependencies with `npm install @react-navigation/native @react-navigation/native-stack react-native-safe-area-context react-native-screens react-native-localize`
 - Paste the 'src' folder structure inside the project's root folder
 - Modify the import in index.js: `import App from './src/App'`
 - Run `npm start` and `npm run android` to start the template
