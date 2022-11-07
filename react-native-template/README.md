@@ -17,7 +17,7 @@ This is a basic React-native template using Typescript
 
 ## Usage
 
-- Create a new project with `npx react-native init newProjext --template react-native-template-typescript`
+- Create a new project with `npx react-native init newProject --template react-native-template-typescript`
 - Go to the project's root folder
 - Install all the dependencies with `npm install...`
 - Paste the 'src' folder structure inside the project's root folder
