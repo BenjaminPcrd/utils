@@ -1,9 +1,7 @@
-type Translation = {
-    hello: string
-}
+type TranslationKeys = 
+    'hello'
 
-type TranslationKeys = keyof Translation
-
+type Translation = Record<TranslationKeys, string>
 type Languages = 'en' | 'fr'
 
 export {

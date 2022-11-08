@@ -1,4 +1,5 @@
-const colors = {
+type Colors = 'pink' | 'purple' | 'red' | 'orange' | 'yellow' | 'green' | 'cyan' | 'blue' | 'brown' | 'black' | 'darker' | 'dark' | 'light' | 'lighter' | 'white'
+const colors: Record<Colors, string> = {
     pink: 'rgb(255, 105, 180)',
     purple: 'rgb(153, 50, 204)',
     red: 'rgb(200, 50, 50)',
@@ -12,8 +13,8 @@ const colors = {
     black: 'rgb(0, 0, 0)',
     darker: 'rgb(30, 30, 30)',
     dark: 'rgb(60, 60, 60)',
-    light: 'rgb(200, 200, 200)',
-    lighter: 'rgb(220, 220, 220)',
+    light: 'rgb(195, 195, 195)',
+    lighter: 'rgb(225, 225, 225)',
     white: 'rgb(255, 255, 255)'
 }
 

@@ -1,13 +1,10 @@
-import React from 'react'
-
-// APIs
-import { useState } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { StyleSheet } from 'react-native'
 
 // types
 import type { RouteProp } from '@react-navigation/native'
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import type { StackParams } from '../../navigation'
+import type { NativeStackNavigationOptions, NativeStackNavigationProp } from '@react-navigation/native-stack'
+import type { MainStackParams } from '../../navigation'
 
 // components
 import { View, Text } from 'react-native'
@@ -17,29 +14,45 @@ import { Button } from '../../components'
 import t from '../../translations'
 
 // styles
-import { Typography, Theme } from '../../styles'
+import { Typography, Colors, ThemeContext, ThemeType } from '../../styles'
 
 type Props = {
-    navigation: NativeStackNavigationProp<StackParams, 'Screen'>
-    route: RouteProp<StackParams, 'Screen'>
+    navigation: NativeStackNavigationProp<MainStackParams, 'Screen'>
+    route: RouteProp<MainStackParams, 'Screen'>
 }
 
 const Screen: React.FC<Props> = ({ navigation }) => {
-    const [text, setText] = useState('exemple')
+    const { theme, toggleTheme } = useContext(ThemeContext)
+    const styles = createStyles(theme)
+    useEffect(() => {
+        navigation.setOptions(navigatorOptions(theme))
+    }, [])
+    
     return (
-        <View>
-            <Text>{t('hello')}</Text>
-            <Text style={styles.text}>{text}</Text>
-            <Button secondary title='OtherScreen' onPress={() => navigation.navigate('OtherScreen')}/>
+        <View style={styles.container}>
+            <Text style={styles.text}>{t('hello')}</Text>
+            <Button title='toggleTheme' onPress={toggleTheme} />
         </View>
     )
 }
 
-const styles = StyleSheet.create({
+const createStyles = (theme: ThemeType) => StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: theme.colors.background
+    },
     text: {
         ...Typography.regular.x40,
-        color: Theme.colors.text
+        color: theme.colors.text
     }
 })
+
+const navigatorOptions = (theme: ThemeType) => ({
+    title: 'Title',
+    headerStyle: {
+        backgroundColor: theme.colors.primary
+    },
+    headerTintColor: Colors.white
+}) as NativeStackNavigationOptions
 
 export default Screen

@@ -1,6 +1,4 @@
-import React from 'react'
-
-// API
+import React, { useContext } from 'react'
 import { StyleSheet } from 'react-native'
 
 // components
@@ -10,17 +8,20 @@ import {
 } from 'react-native'
 
 // styles
-import { Theme, Colors, Sizing, Typography } from '../../styles'
+import { Colors, Sizing, Typography, Outlines, ThemeContext, ThemeType } from '../../styles'
 
 type Props = {
     title: string
     primary?: boolean
     secondary?: boolean
+    warning?: boolean
     danger?: boolean
     onPress: () => void
 }
 
-const Button: React.FC<Props> = ({ title, primary, secondary, danger, onPress }) => {
+const Button: React.FC<Props> = ({ title, primary, secondary, warning, danger, onPress }) => {
+    const { theme } = useContext(ThemeContext)
+    const styles = createStyles(theme)
     return (
         <Pressable 
             onPress={onPress} 
@@ -29,6 +30,7 @@ const Button: React.FC<Props> = ({ title, primary, secondary, danger, onPress })
                 { opacity: state.pressed ? 0.75 : 1 },
                 primary && styles.primary,
                 secondary && styles.secondary,
+                warning && styles.warning,
                 danger && styles.danger
             ]}
         >
@@ -37,6 +39,7 @@ const Button: React.FC<Props> = ({ title, primary, secondary, danger, onPress })
                     styles.defaultText,
                     primary && styles.textPrimary,
                     secondary && styles.textSecondary,
+                    warning && styles.textWarning,
                     danger && styles.textDanger
                 ]}
             >
@@ -45,33 +48,36 @@ const Button: React.FC<Props> = ({ title, primary, secondary, danger, onPress })
         </Pressable>
     )
 }
-
-const styles = StyleSheet.create({
+const createStyles = (theme: ThemeType) => StyleSheet.create({
     default: {
         alignItems: 'center',
         justifyContent: 'center',
         padding: Sizing.x10,
         margin: Sizing.x10,
-        borderRadius: Sizing.borderRadius.base,
-        borderWidth: Sizing.borderWidth.thin,
-        borderColor: Colors.black
+        ...Outlines.border.base,
+        borderColor: Colors.black,
+        backgroundColor: theme.colors.card
     },
     primary: {
         borderWidth: 0,
-        backgroundColor: Theme.colors.primary
+        backgroundColor: theme.colors.primary
     },
     secondary: {
         borderWidth: 0,
-        backgroundColor: Theme.colors.secondary
+        backgroundColor: theme.colors.secondary
+    },
+    warning: {
+        borderWidth: 0,
+        backgroundColor: theme.colors.warning
     },
     danger: {
         borderWidth: 0,
-        backgroundColor: Theme.colors.danger
+        backgroundColor: theme.colors.danger
     },
 
     defaultText: {
         ...Typography.semibold.x30,
-        color: Colors.black
+        color: theme.colors.text
     },
     textPrimary: {
         color: Colors.white
@@ -79,9 +85,14 @@ const styles = StyleSheet.create({
     textSecondary: {
         color: Colors.white
     },
+    textWarning: {
+        color: Colors.white
+    },
     textDanger: {
         color: Colors.white
     }
 })
+
+
 
 export default Button

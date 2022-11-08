@@ -1,7 +1,7 @@
 import type { Translation } from './types'
 
 const french: Translation = {
-    hello: 'Bonjour'
+    hello: 'Bonjour',
 }
 
 export default french

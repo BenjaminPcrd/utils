@@ -1,17 +1,17 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 
-import StackNavigator, { type StackParams } from './StackNavigator'
+import MainStack, { type MainStackParams } from './MainStack'
 
 const Navigation: React.FC = () => {
     return (
         <NavigationContainer>
-            <StackNavigator />
+            <MainStack />
         </NavigationContainer>
     )
 }
 
 export default Navigation
 export {
-    type StackParams
+    type MainStackParams
 }
