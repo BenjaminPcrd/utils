@@ -34,14 +34,14 @@ This is a basic React-native template using Typescript
         - `index.ts`: to facilitate imports
     - `/navigation`
         - `index.tsx`: this is the navigation root with `NavigationContainer`
-        - `StackNavigator.tsx`: a basic stack navigator with two screens
+        - `MainStack.tsx`: a basic stack navigator
     - `/screens`
-        - `/OtherScreen`: screen example
         - `/Screen`: screen example
     - `/styles`
         - `colors.ts`: palette of colors
         - `index.ts`: managing themes and facilitate imports
-        - `sizing.ts`: for margins, paddings, borders and more
+        - `outlines.ts`: for borders and shadows
+        - `sizing.ts`: for margins, paddings and more
         - `typography.ts`: for text styling
     - `/translations`
         - `english.ts`: english translation
