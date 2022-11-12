@@ -2,24 +2,22 @@ import React, { useContext } from 'react'
 import { StyleSheet } from 'react-native'
 
 // components
-import {
-    Pressable,
-    Text
-} from 'react-native'
+import { Pressable, Text } from 'react-native'
 
 // styles
-import { Colors, Sizing, Typography, Outlines, ThemeContext, ThemeType } from '../../styles'
+import { Sizing, Typography, Outlines, ThemeContext, ThemeType } from '../../styles'
 
 type Props = {
     title: string
     primary?: boolean
     secondary?: boolean
+    success?: boolean
     warning?: boolean
     danger?: boolean
     onPress: () => void
 }
 
-const Button: React.FC<Props> = ({ title, primary, secondary, warning, danger, onPress }) => {
+const Button: React.FC<Props> = ({ title, primary, secondary, success, warning, danger, onPress }) => {
     const { theme } = useContext(ThemeContext)
     const styles = createStyles(theme)
     return (
@@ -30,6 +28,7 @@ const Button: React.FC<Props> = ({ title, primary, secondary, warning, danger, o
                 { opacity: state.pressed ? 0.75 : 1 },
                 primary && styles.primary,
                 secondary && styles.secondary,
+                success && styles.success,
                 warning && styles.warning,
                 danger && styles.danger
             ]}
@@ -39,6 +38,7 @@ const Button: React.FC<Props> = ({ title, primary, secondary, warning, danger, o
                     styles.defaultText,
                     primary && styles.textPrimary,
                     secondary && styles.textSecondary,
+                    success && styles.textSuccess,
                     warning && styles.textWarning,
                     danger && styles.textDanger
                 ]}
@@ -54,42 +54,49 @@ const createStyles = (theme: ThemeType) => StyleSheet.create({
         justifyContent: 'center',
         padding: Sizing.x10,
         margin: Sizing.x10,
-        ...Outlines.border.base,
-        borderColor: Colors.black,
-        backgroundColor: theme.colors.card
+        ...Outlines.border.small,
+        borderColor: theme.onBackground,
+        backgroundColor: theme.surface
     },
     primary: {
         borderWidth: 0,
-        backgroundColor: theme.colors.primary
+        backgroundColor: theme.primary
     },
     secondary: {
         borderWidth: 0,
-        backgroundColor: theme.colors.secondary
+        backgroundColor: theme.secondary
+    },
+    success: {
+        borderWidth: 0,
+        backgroundColor: theme.success
     },
     warning: {
         borderWidth: 0,
-        backgroundColor: theme.colors.warning
+        backgroundColor: theme.warning
     },
     danger: {
         borderWidth: 0,
-        backgroundColor: theme.colors.danger
+        backgroundColor: theme.danger
     },
 
     defaultText: {
         ...Typography.semibold.x30,
-        color: theme.colors.text
+        color: theme.onSurface
     },
     textPrimary: {
-        color: Colors.white
+        color: theme.onPrimary
     },
     textSecondary: {
-        color: Colors.white
+        color: theme.onPrimary
+    },
+    textSuccess: {
+        color: theme.onPrimary
     },
     textWarning: {
-        color: Colors.white
+        color: theme.onPrimary
     },
     textDanger: {
-        color: Colors.white
+        color: theme.onPrimary
     }
 })
 
