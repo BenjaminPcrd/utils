@@ -46,7 +46,7 @@ git checkout new-branch # bascule vers une branche
 git branch new-branch # créé une nouvelle branche
 git checkout -b new-branch # créé une nouvelle branche et bascule dessus
 
-git push -u origin new-branch # permet lier la branche locale avec la remote
+git branch -u origin/new-branch # permet lier la branche locale avec la remote
 git merge new-branch # fusionne new-branch dans la branche courante
 
 git rebase main # récupère les modification de la branche main sur une autre branche
