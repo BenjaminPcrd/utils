@@ -1,7 +1,23 @@
 # Memo git
 
+- [Configurer git](#configurer-git)
+- [Créer un repository](#créer-un-repository)
+- [Commandes basiques](#commandes-basiques)
+- [Utiliser les logs](#utiliser-les-logs)
+- [Gérer les branches](#gérer-les-branches)
+    - [Se déplacer](#se-déplacer)
+    - [Créer une nouvelle branche](#créer-une-nouvelle-branche)
+    - [Supprimer une branche](#supprimer-une-branche)
+    - [Fusionner une branche](#fusionner-une-branche)
+- [Git stash](#git-stash)
+- [Les submodules](#les-submodules)
+- [Les alias](#les-alias)
+
 ## Configurer git
+
 ```bash
+git config --global --edit
+# ou
 git config --global user.name "username"
 git config --global user.email "email@gmail.com"
 ```
@@ -21,8 +37,11 @@ git push -u origin main # -u est un raccourci de --set-upstream
 ## Commandes basiques
 
 ```bash
+git status # permet de savoir où on en est
 git add . # ajoute tous les fichiers au suivi
-git pull # télécharge les modifications du serveur sur la branch locale
+git commit -m "commit message" # créé un commit avec un message
+git fetch # télécharge les modifications distantes
+git pull # fusionne modifications distantes sur la branche locale
 ```
 
 ## Utiliser les logs
@@ -38,27 +57,41 @@ git log --before="2022-10-04" # liste les commits avant une certaine date
 
 ## Gérer les branches
 
+### Se déplacer
+
 ```bash
 git branch # liste les branches
 git branch -v # liste les branches avec leur dernier commit
 git checkout new-branch # bascule vers une branche
+```
 
+### Créer une nouvelle branche
+
+```bash
 git branch new-branch # créé une nouvelle branche
 git checkout -b new-branch # créé une nouvelle branche et bascule dessus
-
 git branch -u origin/new-branch # permet lier la branche locale avec la remote
-git merge new-branch # fusionne new-branch dans la branche courante
 
-git rebase main # récupère les modification de la branche main sur une autre branche
+# quand la branche remote existe déjà
+git switch new-branch # créé la branche en local, la lie à la remote et bascule dessus
+```
 
+### Supprimer une branche
+
+```bash
 git branch -d new-branch # supprime la branche en local
+```
 
-git checkout <id du commit> # reviens à un état anterieur
+### Fusionner une branche
+
+```bash
+git merge new-branch # fusionne new-branch dans la branche courante
 ```
 
 ## Git stash
 
->Garder des modifications sans effectuer de commits
+> Garder des modifications sans effectuer de commit
+
 ```bash
 git stash # sauvegarde les modifications
 git stash list # liste les stash
@@ -68,12 +101,14 @@ git stash pop # récupère les dernières modifications enregistrées
 
 ## Les submodules
 
->Un dépot qui est à l'intérieur d'un autre dépot
+> Un dépot qui est à l'intérieur d'un autre dépot
 
 Commencer par forker un dépot sur son compte
+
 ```bash
 git submodule add <repository url> # clone le dépot
 ```
+
 Permet, sur le serveur, de créer un lien vers le dépot ajouté en submodule
 
 ## Les alias
@@ -81,7 +116,9 @@ Permet, sur le serveur, de créer un lien vers le dépot ajouté en submodule
 ```bash
 git config --global --edit
 ```
+
 Exemples d'alias :
+
 ```
 [alias]
     last = log -1 HEAD
@@ -91,7 +128,3 @@ Exemples d'alias :
     cb = checkout -b
     st = status
 ```
-
-## Git-flow
-
-Installer git-flow avec `sudo apt install git-flow`
