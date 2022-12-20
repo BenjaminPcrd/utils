@@ -115,6 +115,8 @@ Permet, sur le serveur, de créer un lien vers le dépot ajouté en submodule
 
 ```bash
 git config --global --edit
+ou
+git --gobal alias.aliasName "aliasCommand"
 ```
 
 Exemples d'alias :
